@@ -17,6 +17,8 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
+    <PackageReference Include="PetaPoco.Compiled" Version="6.0.480" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ED_api.Contracts\ED_api.Contracts.csproj">
@@ -28,5 +30,8 @@
     <ProjectReference Include="..\ED_api.Services\ED_api.Services.csproj">
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Mapping\" />
   </ItemGroup>
 </Project>

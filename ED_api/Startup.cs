@@ -27,12 +27,20 @@ namespace ED_api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            var connectionString = Configuration.GetConnectionString("EmployeeDB");
+
             services.AddControllers();
+
+            services.AddScoped<IEmployeeService, EmployeeService>();
+            services.AddScoped<IPraiseService, PraiseService>();
+
+            services.AddScoped<PetaPoco.Database>((_) => new PetaPoco.Database(connectionString, "System.Data.SqlClient"));
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Employee API", Version = "v1" });
             });
-            services.AddSingleton<IEmployeeService, EmployeeService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

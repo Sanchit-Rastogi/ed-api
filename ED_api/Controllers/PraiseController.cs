@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using AutoMapper;
 using ED_api.Contracts;
 using ED_api.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -12,52 +11,52 @@ using Microsoft.AspNetCore.Mvc;
 namespace ED_api.Controllers
 {
     [Route("api/[controller]")]
-    public class EmployeeController : Controller
+    public class PraiseController : Controller
     {
 
-        private readonly IEmployeeService _employeeService;
+        private readonly IPraiseService _praiseService;
 
-        public EmployeeController(IEmployeeService employeeService)
+        public PraiseController(IPraiseService praiseService)
         {
-            this._employeeService = employeeService;
+            _praiseService = praiseService;
         }
 
         // GET: api/values
         [HttpGet]
-        public IEnumerable<Employee> Get()
+        public IEnumerable<Praise> Get()
         {
-            return _employeeService.GetAll();
+            return _praiseService.GetAll();
         }
 
         // GET api/values/5
         [HttpGet("{id}")]
-        public Employee Get(int id)
+        public Praise Get(int id)
         {
-            return _employeeService.GetById(id);
+            return _praiseService.GetById(id);
         }
 
         // POST api/values
         [HttpPost]
-        public void Post([FromBody] Employee emp)
+        public void Post([FromBody] Praise praise)
         {
             if (ModelState.IsValid)
-                _employeeService.Add(emp);
+                _praiseService.Add(praise);
         }
 
         // PUT api/values/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] Employee emp)
+        public void Put(int id, [FromBody] Praise praise)
         {
-            emp.Id = id;
+            praise.Id = id;
             if (ModelState.IsValid)
-                _employeeService.Update(emp);
+                _praiseService.Update(praise);
         }
 
         // DELETE api/values/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-            _employeeService.Delete(id);
+            _praiseService.Delete(id);
         }
     }
 }
