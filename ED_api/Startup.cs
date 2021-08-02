@@ -12,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using AutoMapper;
 
 namespace ED_api
 {
@@ -36,7 +37,7 @@ namespace ED_api
             services.AddScoped<IPraiseService, PraiseService>();
 
             services.AddScoped<PetaPoco.Database>((_) => new PetaPoco.Database(connectionString, "System.Data.SqlClient"));
-
+            services.AddAutoMapper(typeof(Startup));
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Employee API", Version = "v1" });
