@@ -1,37 +1,48 @@
 ﻿using System;
 using System.Collections.Generic;
+using AutoMapper;
 using ED_api.Contracts;
 using ED_api.Models;
+using ED_api.ViewModels;
 
 namespace ED_api.Services
 {
     public class PraiseService : BaseService, IPraiseService
     {
-        public PraiseService(PetaPoco.Database database):base(database){}
+        private readonly IMapper mapper;
 
-        public void Add(Praise praise)
+        public PraiseService(PetaPoco.Database database, IMapper mapper) :base(database){
+            this.mapper = mapper;
+        }
+
+        public void Add(PraiseDTO praise)
         {
-            base.database.Save("Praise", "Id", praise);
+            var p = this.mapper.Map<Praise>(praise);
+            base.database.Insert(p);
         }
 
         public void Delete(int id)
         {
-            base.database.Delete("Praise", "Id", id);
+            base.database.Delete<Praise>(id);
         }
 
-        public IEnumerable<Praise> GetAll()
+        public IEnumerable<PraiseDTO> GetAll()
         {
-            return base.database.Query<Praise>("SELECT * FROM Praise");
+            var p = base.database.Fetch<Praise>();
+            return this.mapper.Map<List<PraiseDTO>>(p);
         }
 
-        public Praise GetById(int id)
+        public PraiseDTO GetById(int id)
         {
-            return base.database.Single<Praise>("SELECT * FROM Praise", id);
+            var p = base.database.SingleOrDefault<Praise>(id);
+
+            return this.mapper.Map<PraiseDTO>(p);
         }
 
-        public void Update(Praise praise)
+        public void Update(PraiseDTO praise)
         {
-            base.database.Update("Praise", "Id", praise);
+            var p = this.mapper.Map<Praise>(praise);
+            base.database.Update(p);
         }
     }
 }

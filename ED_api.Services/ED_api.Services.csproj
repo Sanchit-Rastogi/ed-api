@@ -7,6 +7,7 @@
   <ItemGroup>
     <ProjectReference Include="..\ED_api.Contracts\ED_api.Contracts.csproj" />
     <ProjectReference Include="..\ED_api.Models\ED_api.Models.csproj" />
+    <ProjectReference Include="..\ED_api.ViewModels\ED_api.ViewModels.csproj" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Dapper" Version="2.0.90" />

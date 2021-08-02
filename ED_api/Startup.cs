@@ -32,12 +32,12 @@ namespace ED_api
             var connectionString = Configuration.GetConnectionString("EmployeeDB");
 
             services.AddControllers();
-
+            services.AddAutoMapper(typeof(Startup));
             services.AddScoped<IEmployeeService, EmployeeService>();
             services.AddScoped<IPraiseService, PraiseService>();
 
             services.AddScoped<PetaPoco.Database>((_) => new PetaPoco.Database(connectionString, "System.Data.SqlClient"));
-            services.AddAutoMapper(typeof(Startup));
+            
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Employee API", Version = "v1" });

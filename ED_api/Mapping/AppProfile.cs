@@ -1,6 +1,7 @@
 ﻿using System;
 using AutoMapper;
 using ED_api.Models;
+using ED_api.ViewModels;
 
 namespace ED_api.Mapping
 {
@@ -8,8 +9,8 @@ namespace ED_api.Mapping
     {
         public AppProfile()
         {
-            CreateMap<Employee, EmployeeDTO>();
-            CreateMap<Praise, PraiseDTO>();
+            CreateMap<Employee, EmployeeDTO>().ReverseMap();
+            CreateMap<Praise, PraiseDTO>().ReverseMap();
         }
     }
 }

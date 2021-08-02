@@ -1,19 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using ED_api.Models;
+using ED_api.ViewModels;
 
 namespace ED_api.Contracts
 {
     public interface IEmployeeService
     {
-        public void Add(Employee emp);
+        public void Add(EmployeeDTO emp);
 
-        public IEnumerable<Employee> GetAll();
+        public IEnumerable<EmployeeDTO> GetAll();
 
-        public Employee GetById(int id);
+        public EmployeeDTO GetById(int id);
 
         public void Delete(int id);
 
-        public void Update(Employee emp);
+        public void Update(EmployeeDTO emp);
     }
 }

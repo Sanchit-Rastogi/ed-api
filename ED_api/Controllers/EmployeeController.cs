@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using ED_api.Contracts;
-using ED_api.Models;
+using ED_api.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -24,21 +24,21 @@ namespace ED_api.Controllers
 
         // GET: api/values
         [HttpGet]
-        public IEnumerable<Employee> Get()
+        public IEnumerable<EmployeeDTO> Get()
         {
             return _employeeService.GetAll();
         }
 
         // GET api/values/5
         [HttpGet("{id}")]
-        public Employee Get(int id)
+        public EmployeeDTO Get(int id)
         {
             return _employeeService.GetById(id);
         }
 
         // POST api/values
         [HttpPost]
-        public void Post([FromBody] Employee emp)
+        public void Post([FromBody] EmployeeDTO emp)
         {
             if (ModelState.IsValid)
                 _employeeService.Add(emp);
@@ -46,7 +46,7 @@ namespace ED_api.Controllers
 
         // PUT api/values/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] Employee emp)
+        public void Put(int id, [FromBody] EmployeeDTO emp)
         {
             emp.Id = id;
             if (ModelState.IsValid)

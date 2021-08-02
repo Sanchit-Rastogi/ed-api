@@ -1,5 +1,6 @@
 ﻿using System;
-namespace ED_api.Models
+
+namespace ED_api.ViewModels
 {
     public class EmployeeDTO
     {

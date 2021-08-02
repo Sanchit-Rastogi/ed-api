@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
-using System.IO;
-using System.Linq;
+﻿using System.Collections.Generic;
 using AutoMapper;
-using Dapper;
 using ED_api.Contracts;
 using ED_api.Models;
+using ED_api.ViewModels;
 
 namespace ED_api.Services
 {
@@ -15,91 +10,40 @@ namespace ED_api.Services
     public class EmployeeService : BaseService, IEmployeeService
     {
 
-        public EmployeeService(PetaPoco.Database database):base(database){}
+        private readonly IMapper mapper;
 
-        public void Add(Employee emp)
+        public EmployeeService(PetaPoco.Database database, IMapper mapper):base(database){
+            this.mapper = mapper;
+        }
+
+        public void Add(EmployeeDTO emp)
         {
-            base.database.Save("FlutterEmployees","Id",emp);
+            var employee = this.mapper.Map<Employee>(emp);
+            base.database.Insert(employee);
         }
 
         public void Delete(int id)
         {
-            base.database.Delete("FlutterEmployees", "Id", id);
+            base.database.Delete<Employee>(id);
         }
 
-        public IEnumerable<Employee> GetAll()
+        public IEnumerable<EmployeeDTO> GetAll()
         {
-            return base.database.Query<Employee>("SELECT * FROM FlutterEmployees");
+           var employee = base.database.Fetch<Employee>();
+            return this.mapper.Map<List<EmployeeDTO>>(employee);
         }
 
-        public Employee GetById(int id)
+        public EmployeeDTO GetById(int id)
         {
-            return base.database.Single<Employee>("SELECT * FROM FlutterEmployees", id);
+            var employee = base.database.SingleOrDefault<Employee>(id);
+
+            return this.mapper.Map<EmployeeDTO>(employee);
         }
 
-        public void Update(Employee emp)
+        public void Update(EmployeeDTO emp)
         {
-            base.database.Update("FlutterEmployees", "Id", emp);
+            var employee = this.mapper.Map<Employee>(emp);
+            base.database.Update(employee);
         }
     }
-
-
-    //public class EmployeeService : IEmployeeService
-    //{
-
-    //    private readonly string connectionString;
-
-    //    public EmployeeService()
-    //    {
-    //        connectionString = "Data Source=.;Initial Catalog=ED_Flutter_DB;user=sa;password=Sanchit123@sql#;Trusted_Connection=false";
-    //    }
-
-    //    public IDbConnection Connection
-    //    {
-    //        get
-    //        {
-    //            return new SqlConnection(connectionString);
-    //        }
-    //    }
-
-    //    public void Add(Employee emp)
-    //    {
-    //        using IDbConnection dbConnection = Connection;
-    //        string sQuery = "INSERT INTO FlutterEmployees(FirstName, LastName, PhoneNumber, Email, Gender ) VALUES (@FirstName, @LastName, @PhoneNumber, @Email, @Gender)";
-    //        dbConnection.Open();
-    //        dbConnection.Execute(sQuery, emp);
-    //    }
-
-    //    public void Delete(int id)
-    //    {
-    //        using IDbConnection dbConnection = Connection;
-    //        string sQuery = "DELETE FROM FlutterEmployees WHERE Id=@Id";
-    //        dbConnection.Open();
-    //        dbConnection.Execute(sQuery, new { Id = id });
-    //    }
-
-    //    public IEnumerable<Employee> GetAll()
-    //    {
-    //        using IDbConnection dbConnection = Connection;
-    //        string sQuery = "SELECT * FROM FlutterEmployees";
-    //        dbConnection.Open();
-    //        return dbConnection.Query<Employee>(sQuery);
-    //    }
-
-    //    public Employee GetById(int id)
-    //    {
-    //        using IDbConnection dbConnection = Connection;
-    //        string sQuery = "SELECT * FROM FlutterEmployees WHERE Id=@Id";
-    //        dbConnection.Open();
-    //        return dbConnection.Query<Employee>(sQuery, new { Id = id }).FirstOrDefault();
-    //    }
-
-    //    public void Update(Employee emp)
-    //    {
-    //        using IDbConnection dbConnection = Connection;
-    //        string sQuery = "UPDATE FlutterEmployees SET FirstName=@FirstName, LastName=@LastName, PhoneNumber=@PhoneNumber, Email=@Email, Gender=@Gender WHERE Id=@Id";
-    //        dbConnection.Open();
-    //        dbConnection.Query(sQuery, emp);
-    //    }
-    //}
 }

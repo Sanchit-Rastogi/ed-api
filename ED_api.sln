@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ED_api.Contracts", "ED_api.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ED_api.Services", "ED_api.Services\ED_api.Services.csproj", "{A68FE147-2892-44B1-B938-64F0FCC41982}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ED_api.ViewModels", "ED_api.ViewModels\ED_api.ViewModels.csproj", "{F55E58AE-E6AF-477D-BBD8-08DF9DA9D0C9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{A68FE147-2892-44B1-B938-64F0FCC41982}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A68FE147-2892-44B1-B938-64F0FCC41982}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A68FE147-2892-44B1-B938-64F0FCC41982}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F55E58AE-E6AF-477D-BBD8-08DF9DA9D0C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F55E58AE-E6AF-477D-BBD8-08DF9DA9D0C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F55E58AE-E6AF-477D-BBD8-08DF9DA9D0C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F55E58AE-E6AF-477D-BBD8-08DF9DA9D0C9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

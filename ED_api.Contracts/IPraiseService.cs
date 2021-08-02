@@ -1,19 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using ED_api.Models;
+using ED_api.ViewModels;
 
 namespace ED_api.Contracts
 {
     public interface IPraiseService
     {
-        public void Add(Praise praise);
+        public void Add(PraiseDTO praise);
 
-        public IEnumerable<Praise> GetAll();
+        public IEnumerable<PraiseDTO> GetAll();
 
-        public Praise GetById(int id);
+        public PraiseDTO GetById(int id);
 
         public void Delete(int id);
 
-        public void Update(Praise praise);
+        public void Update(PraiseDTO praise);
     }
 }
